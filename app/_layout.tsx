@@ -53,14 +53,14 @@ export default function RootLayout() {
       />
       <GestureHandlerRootView style={{ flex: 1 }}>
         <ActionSheetProvider>
-          <NavThemeProvider value={NAV_THEME[colorScheme]}>
+          
             <Stack screenOptions={{ headerShown: false }}>
               <Stack.Screen name="(auth)" />
               <Stack.Screen name="(main)" />
               <Stack.Screen name="call" options={{ presentation: 'fullScreenModal' }} />
               <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
             </Stack>
-          </NavThemeProvider>
+          
         </ActionSheetProvider>
       </GestureHandlerRootView>
     </>
