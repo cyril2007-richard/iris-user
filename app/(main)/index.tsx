@@ -6,8 +6,12 @@ import { Button } from '@/components/nativewindui/Button';
 import { Text } from '@/components/nativewindui/Text';
 import { useDeviceStore } from '@/store/useDeviceStore';
 import { useAuthStore } from '@/store/useAuthStore';
+
 import { startBridgeEngine, stopBridgeEngine } from '@/lib/bridgeEngine';
 import { startCallRelay, stopCallRelay } from '@/lib/callRelay';
+import { startFaceRelay, stopFaceRelay } from '@/lib/faceRelay';
+import { startAlertRelay, stopAlertRelay } from '@/lib/alertRelay';
+import { startLocationForwarder, stopLocationForwarder } from '@/lib/locationForwarder';
 
 export default function HomeScreen() {
   const status = useDeviceStore((s) => s.status);
@@ -22,10 +26,16 @@ export default function HomeScreen() {
     
     startBridgeEngine(deviceId);
     startCallRelay(deviceId);
+    startFaceRelay(deviceId);
+    startAlertRelay(deviceId);
+    startLocationForwarder(deviceId);
 
     return () => {
       stopBridgeEngine();
       stopCallRelay();
+      stopFaceRelay();
+      stopAlertRelay();
+      stopLocationForwarder();
     };
   }, []);
 
