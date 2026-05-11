@@ -1,9 +1,9 @@
 {
   "expo": {
     "name": "Iris_user",
-    "slug": "Iris_user",
+    "slug": "irisuser",
     "version": "1.0.0",
-    "scheme": "Iris_user",
+    "scheme": "iris_user",
     "platforms": [
       "ios",
       "android"
@@ -52,8 +52,9 @@
     "extra": {
       "router": {},
       "eas": {
-        "projectId": "ccca6740-8d30-4612-a9c7-4b65f9a9f30c"
+        "projectId": "575d5e45-48fc-4b5e-a8d7-00a9cb6d860e"
       }
-    }
+    },
+    "owner": "cyril_404"
   }
 }
