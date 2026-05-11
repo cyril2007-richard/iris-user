@@ -4,26 +4,34 @@
     "slug": "Iris_user",
     "version": "1.0.0",
     "scheme": "Iris_user",
-    "platforms": ["ios", "android"],
+    "platforms": [
+      "ios",
+      "android"
+    ],
     "web": {
       "bundler": "metro",
       "output": "static",
       "favicon": "./assets/favicon.png"
     },
-    "plugins": ["expo-router", "@react-native-community/datetimepicker"],
+    "plugins": [
+      "expo-router",
+      "@react-native-community/datetimepicker"
+    ],
     "experiments": {
       "typedRoutes": true,
       "tsconfigPaths": true
     },
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "automatic",
+    "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true
     },
@@ -31,6 +39,20 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
+      },
+      "permissions": [
+        "CAMERA",
+        "RECORD_AUDIO",
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO",
+        "android.permission.MODIFY_AUDIO_SETTINGS"
+      ],
+      "package": "com.cyril_404.Iris_user"
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "ccca6740-8d30-4612-a9c7-4b65f9a9f30c"
       }
     }
   }
