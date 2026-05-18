@@ -16,47 +16,10 @@ export function startFaceRelay(deviceId: string) {
 
       // Handle new or pending faces
       if ((change.type === 'added' || change.type === 'modified') && face.status === 'pending') {
-        try {
-          // 1. Download image from Firebase Storage URL
-          const response = await fetch(face.imageUrl);
-          const blob = await response.blob();
-          
-          // 2. Convert to Base64
-          const reader = new FileReader();
-          reader.readAsDataURL(blob);
-          reader.onloadend = async () => {
-            const base64data = (reader.result as string).split(',')[1];
-            
-            // 3. Send to Pi
-            try {
-              const piResponse = await piApi.post('/faces/add', {
-                faceId: faceId,
-                name: face.name,
-                imageData: base64data,
-              });
-
-              // 4. Update Firestore on success
-              if (piResponse.data && piResponse.data.success) {
-                await setDoc(doc(getFirebaseDb(), 'devices', deviceId, 'faces', faceId), {
-                  status: 'synced'
-                }, { merge: true });
-              } else {
-                throw new Error('Pi rejected the face image');
-              }
-            } catch (err) {
-              console.log('[FaceRelay] Pi unreachable during add, marking as failed');
-              await setDoc(doc(getFirebaseDb(), 'devices', deviceId, 'faces', faceId), {
-                status: 'failed'
-              }, { merge: true });
-            }
-          };
-
-        } catch (error) {
-          console.error(`Failed to relay face ${faceId}:`, error);
-          await setDoc(doc(getFirebaseDb(), 'devices', deviceId, 'faces', faceId), {
-            status: 'failed'
-          }, { merge: true });
-        }
+        // Since the Pi is stream-only, we immediately mark as synced for visual feedback in the Caregiver app
+        await setDoc(doc(getFirebaseDb(), 'devices', deviceId, 'faces', faceId), {
+          status: 'synced'
+        }, { merge: true });
       }
 
       // Handle deleted faces

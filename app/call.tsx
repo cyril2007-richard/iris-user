@@ -94,10 +94,7 @@ export default function UserCallScreen() {
           await setDoc(callSignalRef, { status: 'active' }, { merge: true });
         }
 
-        // Always signal Pi
-        axios.post(`${PI_API_URL}/call/join`, { url: PARTICIPANT_URL }).catch(() => {
-          console.log('Pi unreachable, phone camera fallback active');
-        });
+        // Pi doesn't have an API to signal call join, so we rely on the WebView joining
       }
 
       unsub = onSnapshot(callSignalRef, (snapshot) => {
@@ -140,11 +137,23 @@ export default function UserCallScreen() {
 
   return (
     <View style={styles.container}>
+      <View className="absolute inset-0 items-center justify-center bg-blue-900">
+        <View className="mb-8 rounded-full bg-blue-500/20 p-12">
+          <MaterialCommunityIcons name="microphone" size={120} color="white" />
+        </View>
+        <Text variant="title1" className="font-black tracking-tighter text-white">
+          VOICE CALL ACTIVE
+        </Text>
+        <Text className="mt-2 text-blue-200 uppercase font-bold tracking-widest">
+          Iris Eyes Streaming in Background
+        </Text>
+      </View>
+
       <WebView
         source={{
-          uri: `${currentUrl}${currentUrl.includes('?') ? '&' : '?'}embed&skipMediaPermissionPrompt&audio=on&video=on`,
+          uri: `${currentUrl}${currentUrl.includes('?') ? '&' : '?'}embed&skipMediaPermissionPrompt&audio=on&video=off`,
         }}
-        style={styles.webView}
+        style={{ opacity: 0, height: 0, width: 0 }}
         javaScriptEnabled={true}
         domStorageEnabled={true}
         mediaPlaybackRequiresUserAction={false}

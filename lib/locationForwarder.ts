@@ -35,14 +35,9 @@ export async function startLocationForwarder(deviceId: string) {
           updatedAt: serverTimestamp()
         });
 
-        // 2. Send to Pi
-        await piApi.post('/location/update', {
-          lat: latitude,
-          lng: longitude,
-          accuracy
-        });
+        // 2. Pi doesn't have an API for location, so we skip local forwarding
       } catch (error) {
-        console.log('Failed to forward location:', error);
+        console.log('Failed to forward location to Cloud:', error);
       }
     }
   );

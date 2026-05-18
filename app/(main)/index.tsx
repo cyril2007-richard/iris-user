@@ -14,7 +14,7 @@ import { startLocationForwarder, stopLocationForwarder } from '@/lib/locationFor
 import { useAuthStore } from '@/store/useAuthStore';
 import { useDeviceStore } from '@/store/useDeviceStore';
 
-const PI_STREAM_URL = 'http://10.105.145.57:5000/stream.mjpg';
+const PI_STREAM_URL = 'http://10.105.145.57:5000';
 
 export default function HomeScreen() {
   const status = useDeviceStore((s) => s.status);
@@ -80,18 +80,22 @@ export default function HomeScreen() {
       </View>
 
       <View
-        className={`mb-6 flex-row items-center justify-center rounded-3xl border-4 ${status === 'online' ? 'border-green-500 bg-green-50' : 'border-gray-300 bg-gray-50'} py-6 shadow-xl shadow-black/10`}>
+        className={`mb-6 flex-row items-center justify-center rounded-3xl border-4 ${status === 'online' ? 'border-green-500 bg-green-50' : 'border-red-300 bg-red-50'} py-6 shadow-xl shadow-black/10`}>
         <View className="items-center">
           <View className="flex-row items-center">
             <MaterialCommunityIcons
-              name={status === 'online' ? 'check-circle' : 'close-circle'}
+              name={status === 'online' ? 'check-circle' : 'alert-circle'}
               size={32}
-              color={status === 'online' ? '#22c55e' : '#9ca3af'}
+              color={status === 'online' ? '#22c55e' : '#ef4444'}
             />
             <Text
-              className={`ml-3 text-2xl font-black ${status === 'online' ? 'text-green-700' : 'text-gray-600'}`}>
-              {status === 'online' ? 'SYSTEM ONLINE' : 'SYSTEM OFFLINE'}
+              className={`ml-3 text-2xl font-black ${status === 'online' ? 'text-green-700' : 'text-red-700'}`}>
+              {status === 'online' ? 'SYSTEM ONLINE' : 'CONNECTION FAILED'}
             </Text>
+          </View>
+          <View className="mt-2 flex-row items-center rounded-full bg-gray-200 px-3 py-1">
+            <MaterialCommunityIcons name="ip-network" size={14} color="#4b5563" />
+            <Text className="ml-1 text-[10px] font-bold text-gray-600">Target: {PI_STREAM_URL.replace('/stream.mjpg', '').replace('http://', '')}</Text>
           </View>
           {status === 'online' && (
             <View className="mt-2 flex-row items-center rounded-full bg-blue-100 px-3 py-1">
@@ -101,6 +105,7 @@ export default function HomeScreen() {
           )}
         </View>
       </View>
+
 
       <Button
         onPress={startCall}
