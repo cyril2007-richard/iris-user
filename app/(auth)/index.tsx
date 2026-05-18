@@ -9,12 +9,10 @@ export default function SetupScreen() {
   const { setUser } = useAuthStore();
 
   const handleLogin = () => {
-    console.log('[Prototype] Entering User Application...');
-    // Prototype Setup: Mock user setup
     setUser({
-      uid: 'mock-user-id',
-      email: 'prototype@iris.com',
-      displayName: 'Prototype User',
+      uid: 'iris-user-primary',
+      email: 'user@iris.com',
+      displayName: 'Iris User',
     });
   };
 
@@ -22,11 +20,12 @@ export default function SetupScreen() {
     <View className="flex-1 items-center justify-center bg-white p-6">
       <Text variant="title1" className="mb-2 font-bold text-primary">Iris Setup</Text>
       <Text variant="body" className="mb-10 text-center text-textSecondary">
-        Prototype Mode: Tap below to start the application.
+        Complete your device configuration to get started.
       </Text>
       <Button onPress={handleLogin} className="flex h-14 w-full items-center justify-center rounded-xl bg-primary">
-        <Text className="font-semibold text-white">Start Prototype</Text>
+        <Text className="font-bold text-white uppercase tracking-widest">Connect Device</Text>
       </Button>
     </View>
+
   );
 }

@@ -3,8 +3,8 @@ import { doc, onSnapshot, setDoc, serverTimestamp } from 'firebase/firestore';
 import { getFirebaseDb } from './firebase';
 import { useDeviceStore } from '@/store/useDeviceStore';
 
-const PI_IP = process.env.EXPO_PUBLIC_PI_LOCAL_IP || '192.168.43.100';
-const PI_PORT = process.env.EXPO_PUBLIC_PI_API_PORT || '8000';
+const PI_IP = process.env.EXPO_PUBLIC_PI_LOCAL_IP || '10.105.145.57';
+const PI_PORT = process.env.EXPO_PUBLIC_PI_API_PORT || '5000';
 const PI_BASE_URL = `http://${PI_IP}:${PI_PORT}`;
 
 export const piApi = axios.create({
